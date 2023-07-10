@@ -10,7 +10,7 @@ const String _kStatusMessageKey = 'status';
 
 /// Used to determine whether the server is alive
 class Game {
-  final SpaceTradersClient _client;
+  final ISpaceTradersClient _client;
 
   Game(this._client);
 

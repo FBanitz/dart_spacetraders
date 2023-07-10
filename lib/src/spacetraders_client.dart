@@ -11,8 +11,27 @@ const String _kTokenHeader = 'Authorization';
 /// The prefix for the token.
 const String _kTokenPrefix = 'Bearer ';
 
+abstract class ISpaceTradersClient {
+  /// Sets the token for the client.
+  void setToken(String token);
+
+  /// http `GET` call to the SpaceTraders API.
+  Future<Map<String, dynamic>> get(
+    /// The path to call.
+    String path,
+  );
+
+  /// http `POST` call to the SpaceTraders API.
+  Future<Map<String, dynamic>> post(
+    /// The path to call.
+    String path, {
+    /// The body to send.
+    Map<String, dynamic>? body,
+  });
+}
+
 /// A client for the SpaceTraders API.
-class SpaceTradersClient {
+class SpaceTradersClient extends ISpaceTradersClient {
   /// The token for the client.
   String? _token;
 
@@ -20,11 +39,13 @@ class SpaceTradersClient {
   SpaceTradersClient([this._token]);
 
   /// Sets the token for the client.
+  @override
   void setToken(String token) {
     _token = token;
   }
 
   /// http `GET` call to the SpaceTraders API.
+  @override
   Future<Map<String, dynamic>> get(
     /// The path to call.
     String path,
@@ -43,6 +64,7 @@ class SpaceTradersClient {
   }
 
   /// http `POST` call to the SpaceTraders API.
+  @override
   Future<Map<String, dynamic>> post(
     /// The path to call.
     String path, {
