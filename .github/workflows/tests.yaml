@@ -4,9 +4,6 @@ on: [push]
 
 jobs:
   tests:
-    defaults:
-      run:
-        working-directory: dotspot3_server
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
