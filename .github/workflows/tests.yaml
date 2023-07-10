@@ -1,0 +1,19 @@
+name: tests
+
+on: [push]
+
+jobs:
+  tests:
+    defaults:
+      run:
+        working-directory: dotspot3_server
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.10.0'
+        channel: 'stable'
+    - run: dart pub get
+    - run: dart analyze
+    - run: dart test
