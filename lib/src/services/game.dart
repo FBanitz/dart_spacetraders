@@ -9,10 +9,10 @@ const String _kStatusPath = '$_kGamePath/status';
 const String _kStatusMessageKey = 'status';
 
 /// Used to determine whether the server is alive
-class Game {
+class GameService {
   final ISpaceTradersClient _client;
 
-  Game(this._client);
+  GameService(this._client);
 
   /// Returns whether the server is alive
   Future<bool> status() async {

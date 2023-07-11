@@ -22,7 +22,7 @@ class _MockSpaceTradersClient implements ISpaceTradersClient {
 
 void main() {
   final client = _MockSpaceTradersClient();
-  final game = Game(client);
+  final game = GameService(client);
   group('Game', () {
     test('status', () async {
       final status = await game.status();

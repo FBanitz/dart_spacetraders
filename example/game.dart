@@ -3,7 +3,7 @@ import 'package:dart_spacetraders/src/spacetraders_client.dart';
 
 void main() async {
   final client = SpaceTradersClient();
-  final game = Game(client);
+  final game = GameService(client);
 
   final status = await game.status();
   print('Spacetraders server is alive: $status');
