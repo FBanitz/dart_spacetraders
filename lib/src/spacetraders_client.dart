@@ -11,9 +11,18 @@ const String _kTokenHeader = 'Authorization';
 /// The prefix for the token.
 const String _kTokenPrefix = 'Bearer ';
 
+/// The key for the error response.
+const String _kResponseErrorKey = 'error';
+
+/// The key for the error message.
+const String _kResponseErrorMessageKey = 'message';
+
 abstract class ISpaceTradersClient {
-  /// Sets the token for the client.
-  void setToken(String token);
+  ISpaceTradersClient([this.token]);
+
+  /// The token to use for requests.
+  /// You can get a token by calling `claim` on the `AccountService`.
+  String? token;
 
   /// http `GET` call to the SpaceTraders API.
   Future<Map<String, dynamic>> get(
@@ -32,17 +41,8 @@ abstract class ISpaceTradersClient {
 
 /// A client for the SpaceTraders API.
 class SpaceTradersClient extends ISpaceTradersClient {
-  /// The token for the client.
-  String? _token;
-
   /// Creates a new client.
-  SpaceTradersClient([this._token]);
-
-  /// Sets the token for the client.
-  @override
-  void setToken(String token) {
-    _token = token;
-  }
+  SpaceTradersClient([super.token]);
 
   /// http `GET` call to the SpaceTraders API.
   @override
@@ -51,19 +51,27 @@ class SpaceTradersClient extends ISpaceTradersClient {
     String path,
   ) async {
     Map<String, String> headers = {};
-    if (_token != null) {
-      headers[_kTokenHeader] = '$_kTokenPrefix$_token';
+    if (token != null) {
+      headers[_kTokenHeader] = '$_kTokenPrefix$token';
     }
 
+    final Uri uri = Uri.parse('$_kBaseUrl$path');
+
     final response = await http.get(
-      Uri.parse('$_kBaseUrl$path'),
+      uri,
       headers: headers,
     );
 
-    return jsonDecode(response.body);
+    Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+    if (responseBody[_kResponseErrorKey] != null) {
+      throw Exception(
+          responseBody[_kResponseErrorKey][_kResponseErrorMessageKey]);
+    }
+
+    return responseBody;
   }
 
-  /// http `POST` call to the SpaceTraders API.
   @override
   Future<Map<String, dynamic>> post(
     /// The path to call.
@@ -72,8 +80,8 @@ class SpaceTradersClient extends ISpaceTradersClient {
     Map<String, dynamic>? body,
   }) async {
     Map<String, String> headers = {};
-    if (_token != null) {
-      headers[_kTokenHeader] = '$_kTokenPrefix$_token';
+    if (token != null) {
+      headers[_kTokenHeader] = '$_kTokenPrefix$token';
     }
 
     final response = await http.post(
@@ -82,6 +90,14 @@ class SpaceTradersClient extends ISpaceTradersClient {
       body: jsonEncode(body),
     );
 
-    return jsonDecode(response.body);
+    Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+    if (responseBody[_kResponseErrorKey] != null) {
+      throw Exception(
+        responseBody[_kResponseErrorKey][_kResponseErrorMessageKey],
+      );
+    }
+
+    return responseBody;
   }
 }
