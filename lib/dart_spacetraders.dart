@@ -5,4 +5,6 @@ library;
 
 export 'src/spacetraders_client.dart';
 
-export 'src/services/game.dart';
+export 'src/services/services.dart';
+
+export 'src/models/models.dart';
