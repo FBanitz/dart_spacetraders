@@ -34,6 +34,7 @@ abstract class ISpaceTradersClient {
   Future<Map<String, dynamic>> post(
     /// The path to call.
     String path, {
+
     /// The body to send.
     Map<String, dynamic>? body,
   });
@@ -76,6 +77,7 @@ class SpaceTradersClient extends ISpaceTradersClient {
   Future<Map<String, dynamic>> post(
     /// The path to call.
     String path, {
+
     /// The body to send.
     Map<String, dynamic>? body,
   }) async {

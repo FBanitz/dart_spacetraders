@@ -32,7 +32,10 @@ void main() {
     });
     test('statusMessage', () async {
       final statusMessage = await game.statusMessage();
-      expect(statusMessage, 'spacetraders is currently online and available to play');
+      expect(
+        statusMessage,
+        'spacetraders is currently online and available to play',
+      );
     });
   });
 }
