@@ -33,10 +33,12 @@ A Dart client package for the [SpaceTraders'](https://spacetraders.io/) API
 
 ### Acount
 ```dart
-  final SpaceTradersClient client = SpaceTradersClient('your-token');
-  final AccountService account = AccountService(client);
-
-  print(await account.myAccount());
+  main() async {
+    final SpaceTradersClient client = SpaceTradersClient('your-token');
+    final AccountService account = AccountService(client);
+  
+    print(await account.myAccount().then((value) => value.username));
+  }
 ```
 
 ### Server status
