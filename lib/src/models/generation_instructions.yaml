@@ -1,0 +1,37 @@
+# This file contains the instructions for the code generation of the models.
+# It is used for AI code generation to simplify the process.
+
+Conversion: "JSON to Dart 3.0.5"
+
+SchemaClass:
+  - Name: "Based on JSON"
+  - Type: "Abstract"
+  - ClassName: "{ClassName}Schema"
+  - StaticConstants:
+    - tableName
+    - ForEachKey: "{keyName}Key"
+    - SingleQuotes
+
+ModelClass:
+  - Name: "{ClassName}"
+  - ForEachJSONKey: "define attribute"
+  - Constructors:
+    - Default: 
+      - "Only generated attributes"
+      - "all required"
+    - fromJson: 
+      - ConvertFrom: "Map<String, dynamic>"
+      - ConvertTo: "instance of {ClassName}"
+      - Using: "{ClassName}Schema.{keyName}Key"
+      - Assertion: "each json value equals model attribute value"
+
+TestModel:
+  - Package: "package:test/test.dart"
+  - Function: 
+    - Name: "Main"
+  - fromJsonTest:
+    - Group: "{ClassName}"
+    - TestName: "fromJson"
+    - constJSON: "with JSON data"
+    - Variable: "model using fromJson"
+    - Expectation: "each model attribute equals JSON value"

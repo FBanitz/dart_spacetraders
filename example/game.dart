@@ -1,5 +1,5 @@
 import 'package:dart_spacetraders/src/services/game.dart';
-import 'package:dart_spacetraders/src/spacetraders_client.dart';
+import 'package:dart_spacetraders/src/client.dart';
 
 void main() async {
   final client = SpaceTradersClient();
