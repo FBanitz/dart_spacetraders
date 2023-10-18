@@ -1,7 +1,7 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library;
+library dart_spacetraders;
 
 export 'src/spacetraders_client.dart';
 
