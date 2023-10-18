@@ -3,7 +3,7 @@
 /// More dartdocs go here.
 library dart_spacetraders;
 
-export 'src/spacetraders_client.dart';
+export 'src/client.dart';
 
 export 'src/services/services.dart';
 

@@ -1,4 +1,4 @@
-import 'package:dart_spacetraders/src/spacetraders_client.dart';
+import 'package:dart_spacetraders/src/client.dart';
 import 'package:test/test.dart';
 import 'package:dart_spacetraders/src/services/game.dart';
 
@@ -32,8 +32,7 @@ void main() {
     });
     test('statusMessage', () async {
       final statusMessage = await game.statusMessage();
-      expect(statusMessage,
-          'spacetraders is currently online and available to play');
+      expect(statusMessage, 'spacetraders is currently online and available to play');
     });
   });
 }

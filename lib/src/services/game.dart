@@ -1,4 +1,4 @@
-import 'package:dart_spacetraders/src/spacetraders_client.dart';
+import 'package:dart_spacetraders/src/client.dart';
 
 /// The path for the game endpoints
 const String _kGamePath = '/game';

@@ -1,5 +1,4 @@
 import 'package:dart_spacetraders/dart_spacetraders.dart';
-import 'package:dart_spacetraders/src/models/user.dart';
 
 const String _kUsersPath = '/users';
 
