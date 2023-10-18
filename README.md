@@ -11,29 +11,42 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
+<!--
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
+-->
 
-## Features
+# Dart Spacetraders
+A Dart client package for the [SpaceTraders'](https://spacetraders.io/) API
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Features ✨
 
-## Getting started
+### Account managment
+- claim account
+- get account informations
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### Game status
+- get server status
 
 ## Usage
+[Examples](./example)
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
+### Acount
 ```dart
-const like = 'sample';
+  final SpaceTradersClient client = SpaceTradersClient('your-token');
+  final AccountService account = AccountService(client);
+
+  print(await account.myAccount());
 ```
 
-## Additional information
+### Server status
+```dart
+  final client = SpaceTradersClient();
+  final game = GameService(client);
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+  final status = await game.status();
+  print('Spacetraders server is alive: $status');
+
+  final statusMessage = await game.statusMessage();
+  print('Spacetraders status message: $statusMessage');
+```
