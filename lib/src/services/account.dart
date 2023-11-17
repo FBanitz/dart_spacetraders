@@ -1,4 +1,4 @@
-import 'package:dart_spacetraders/dart_spacetraders.dart';
+import 'package:dart_spacetraders/src/client.dart';
 import 'package:dart_spacetraders/src/models/user.dart';
 
 const String _kUsersPath = '/users';
@@ -25,11 +25,11 @@ class AccountService {
 
     _client.token = token;
 
-    return User.fromJson(response[UserSchema.table]);
+    return User.fromJson(response[UserSchema.tableName]);
   }
 
   Future<User> myAccount() async {
     final Map<String, dynamic> response = await _client.get(_kMyAccountPath);
-    return User.fromJson(response[UserSchema.table]);
+    return User.fromJson(response[UserSchema.tableName]);
   }
 }

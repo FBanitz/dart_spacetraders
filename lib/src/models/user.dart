@@ -1,12 +1,12 @@
-class UserSchema {
-  static const String table = 'user';
+abstract class UserSchema {
+  static const String tableName = 'user';
   static const String token = 'token';
-  static const String username = 'username';
-  static const String credits = 'credits';
-  static const String ships = 'ships';
-  static const String shipCount = 'shipCount';
-  static const String structureCount = 'structureCount';
-  static const String joinedAt = 'joinedAt';
+  static const String usernameKey = 'username';
+  static const String creditsKey = 'credits';
+  static const String shipsKey = 'ships';
+  static const String shipCountKey = 'shipCount';
+  static const String structureCountKey = 'structureCount';
+  static const String joinedAtKey = 'joinedAt';
 }
 
 class User {
@@ -25,12 +25,12 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    final dynamic username = json[UserSchema.username];
-    final dynamic credits = json[UserSchema.credits];
-    final dynamic ships = json[UserSchema.ships];
-    final dynamic shipCount = json[UserSchema.shipCount];
-    final dynamic structureCount = json[UserSchema.structureCount];
-    final dynamic joinedAt = json[UserSchema.joinedAt];
+    final dynamic username = json[UserSchema.usernameKey];
+    final dynamic credits = json[UserSchema.creditsKey];
+    final dynamic ships = json[UserSchema.shipsKey];
+    final dynamic shipCount = json[UserSchema.shipCountKey];
+    final dynamic structureCount = json[UserSchema.structureCountKey];
+    final dynamic joinedAt = json[UserSchema.joinedAtKey];
 
     if (username is! String) {
       throw Exception('Expected String for username type');

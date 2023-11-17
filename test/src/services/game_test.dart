@@ -1,4 +1,4 @@
-import 'package:dart_spacetraders/src/spacetraders_client.dart';
+import 'package:dart_spacetraders/src/client.dart';
 import 'package:test/test.dart';
 import 'package:dart_spacetraders/src/services/game.dart';
 

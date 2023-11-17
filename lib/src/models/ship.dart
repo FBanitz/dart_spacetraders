@@ -1,37 +1,80 @@
-// {
-//   "cargo": [],
-//   "class": "MK-I",
-//   "flightPlanId": "ckon8lk9m005354nz12qjbucx",
-//   "id": "ckon84fo20196vinzktdlvdlv",
-//   "location": "OE-PM-TR",
-//   "manufacturer": "Jackshaw",
-//   "maxCargo": 50,
-//   "plating": 5,
-//   "spaceAvailable": 32,
-//   "speed": 1,
-//   "type": "JW-MK-I",
-//   "weapons": 5,
-//   "x": 21,
-//   "y": -24
-// },
+import 'package:dart_spacetraders/src/models/cargobox.dart';
+import 'package:dart_spacetraders/src/tools/serialization.dart';
 
-class ShipSchema {
-  static const String table = 'ship';
-  static const String listTable = 'ships';
-  static const String cargo = 'cargo';
-  static const String shipClass_ = 'class';
-  static const String flightPlanId = 'flightPlanId';
-  static const String id = 'id';
-  static const String location = 'location';
-  static const String manufacturer = 'manufacturer';
-  static const String maxCargo = 'maxCargo';
-  static const String plating = 'plating';
-  static const String spaceAvailable = 'spaceAvailable';
-  static const String speed = 'speed';
-  static const String type = 'type';
-  static const String weapons = 'weapons';
-  static const String x = 'x';
-  static const String y = 'y';
+abstract class ShipSchema {
+  static const String tableName = 'ships';
+  static const String cargoKey = 'cargo';
+  static const String classKey = 'class';
+  static const String flightPlanIdKey = 'flightPlanId';
+  static const String idKey = 'id';
+  static const String locationKey = 'location';
+  static const String manufacturerKey = 'manufacturer';
+  static const String maxCargoKey = 'maxCargo';
+  static const String platingKey = 'plating';
+  static const String spaceAvailableKey = 'spaceAvailable';
+  static const String speedKey = 'speed';
+  static const String typeKey = 'type';
+  static const String weaponsKey = 'weapons';
+  static const String xKey = 'x';
+  static const String yKey = 'y';
 }
 
-class Ship {}
+class Ship {
+  final List<CargoBox>? cargo;
+  final String? shipClass;
+  final String? flightPlanId;
+  final String? id;
+  final String? location;
+  final String? manufacturer;
+  final int? maxCargo;
+  final int? plating;
+  final int? spaceAvailable;
+  final int? speed;
+  final String? type;
+  final int? weapons;
+  final int? x;
+  final int? y;
+
+  Ship({
+    this.cargo,
+    this.shipClass,
+    this.flightPlanId,
+    this.id,
+    this.location,
+    this.manufacturer,
+    this.maxCargo,
+    this.plating,
+    this.spaceAvailable,
+    this.speed,
+    this.type,
+    this.weapons,
+    this.x,
+    this.y,
+  });
+
+  factory Ship.fromJson(Map<String, dynamic> json) {
+    List jsonCargo = typeCheck<List>(json[ShipSchema.cargoKey]);
+
+    List<CargoBox> cargo = jsonCargo.map((e) {
+      Map<String, dynamic> cargoBoxJson = typeCheck<Map<String, dynamic>>(e);
+      return CargoBox.fromJson(cargoBoxJson);
+    }).toList();
+
+    return Ship(
+      cargo: cargo,
+      shipClass: typeCheck<String>(json[ShipSchema.classKey]),
+      flightPlanId: typeCheck<String>(json[ShipSchema.flightPlanIdKey]),
+      id: typeCheck<String>(json[ShipSchema.idKey]),
+      location: typeCheck<String>(json[ShipSchema.locationKey]),
+      manufacturer: typeCheck<String>(json[ShipSchema.manufacturerKey]),
+      maxCargo: typeCheck<int>(json[ShipSchema.maxCargoKey]),
+      plating: typeCheck<int>(json[ShipSchema.platingKey]),
+      spaceAvailable: typeCheck<int>(json[ShipSchema.spaceAvailableKey]),
+      speed: typeCheck<int>(json[ShipSchema.speedKey]),
+      type: typeCheck<String>(json[ShipSchema.typeKey]),
+      weapons: typeCheck<int>(json[ShipSchema.weaponsKey]),
+      x: typeCheck<int>(json[ShipSchema.xKey]),
+      y: typeCheck<int>(json[ShipSchema.yKey]),
+    );
+  }
+}
